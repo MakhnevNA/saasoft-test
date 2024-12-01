@@ -1,3 +1,4 @@
+import Aura from '@primevue/themes/aura';
 import { createPinia } from 'pinia';
 import PrimeVue from 'primevue/config';
 import { createApp } from 'vue';
@@ -10,10 +11,12 @@ app
   .use(store)
   .use(PrimeVue, {
     theme: {
+      preset: Aura,
       options: {
-        prefix: 'p',
-        darkModeSelector: 'system',
-        cssLayer: false
+        cssLayer: {
+          name: 'primevue',
+          order: 'tailwind-base, primevue, tailwind-utilities'
+        }
       }
     }
   })

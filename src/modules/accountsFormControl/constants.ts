@@ -1,3 +1,5 @@
+import { zodResolver } from '@primevue/forms/resolvers/zod';
+import { z } from 'zod';
 import {
   AccountsFormControlTypeLabel,
   AccountsFormControlTypeValue
@@ -20,3 +22,7 @@ export const initialAccountValue = {
   login: '',
   password: ''
 };
+
+export const loginZodResolver = zodResolver(
+  z.string().min(5, { message: 'Обязательное поле' })
+);
