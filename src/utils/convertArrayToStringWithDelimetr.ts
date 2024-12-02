@@ -1,6 +1,6 @@
 import { IAccountsFormControlLabelTypes } from '@/modules/accountsFormControl/types.ts';
 
-export const convertArrayToString = (
+export const convertArrayToStringWithDelimetr = (
   arr: IAccountsFormControlLabelTypes[],
   delimiter = '; '
 ) => {

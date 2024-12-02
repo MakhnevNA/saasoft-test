@@ -23,6 +23,51 @@ export const initialAccountValue = {
   password: ''
 };
 
-export const loginZodResolver = zodResolver(
-  z.string().min(5, { message: 'Обязательное поле' })
+export const loginAndPasswordResolver = zodResolver(
+  z
+    .string()
+    .optional()
+    .superRefine((value, ctx) => {
+      if (!value?.trim()) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Обязательное поле'
+        });
+        return;
+      }
+
+      if (value.length > 100) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Максимум 100 символов'
+        });
+      }
+    })
+);
+
+export const labelResolver = zodResolver(
+  z
+    .string()
+    .optional()
+    .superRefine((value, ctx) => {
+      const currentLength = value?.replace(/\s/g, '').length;
+
+      if (!value || value.trim() === '') {
+        return;
+      }
+
+      if (currentLength && currentLength > 50) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Максимум 50 символов.'
+        });
+      }
+
+      if (!/^([\wа-яА-ЯёЁ]+)(; [\wа-яА-ЯёЁ]+)*$/.test(value.trim())) {
+        ctx.addIssue({
+          code: 'custom',
+          message: 'Неверный формат'
+        });
+      }
+    })
 );

@@ -4,6 +4,7 @@
     <prime-button
       icon="pi pi-plus"
       type="button"
+      :disabled="isDisableButton"
       severity="secondary"
       variant="outlined"
       size="small"
@@ -13,14 +14,10 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { Button as PrimeButton } from 'primevue';
-import { defineEmits } from 'vue';
+import { useAccountsFormControl } from '../services/accountsFormControl.service';
 
-const emit = defineEmits<{
-  (event: 'addNewAccount'): void;
-}>();
-
-const addNewAccount = () => {
-  emit('addNewAccount');
-};
+const { addNewAccount } = useAccountsFormControl();
+const { isDisableButton } = storeToRefs(useAccountsFormControl());
 </script>

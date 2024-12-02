@@ -6,7 +6,7 @@
     "rootDir": "src",
     "module": "esnext",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "isolatedModules": true,
     "noEmit": true,
